@@ -1,0 +1,87 @@
+Questions
+1. Take a look at the ‘iris’ dataset that comes with R. The data can be loaded with the code:
+
+library(datasets)
+data(iris)
+A description of the dataset can be found by running
+
+?iris
+There will be an object called ‘iris’ in your workspace. In this dataset, what is the mean of ‘Sepal.Length’ for the species virginica? Please round your answer to the nearest whole number.
+
+(Only enter the numeric result and nothing else.)
+
+
+**7**
+
+Explanation:
+The which function creates an index for virginica species, the $ operator singles out the Sepal.Length column, then the mean and round function do the rest.
+
+round(mean(iris[which(iris$Species == "virginica"),]$Sepal.Length))
+## [1] 7
+2. Continuing with the ‘iris’ dataset from the previous Question, what R code returns a vector of the means of the variables ‘Sepal.Length’, ‘Sepal.Width’, ‘Petal.Length’, and ‘Petal.Width’?
+
+
+**apply(iris[, 1:4], 2, mean)**
+
+Explanation:
+Using Apply to aggregate column means
+
+apply(iris[, 1:4], 2, mean)
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##     5.843333     3.057333     3.758000     1.199333
+3. Load the ‘mtcars’ dataset in R with the following code
+
+library(datasets)
+data(mtcars)
+There will be an object names ‘mtcars’ in your workspace. You can find some information about the dataset by running
+
+?iris
+How can one calculate the average miles per gallon (mpg) by number of cylinders in the car (cyl)? Select all that apply.
+
+
+**with(mtcars, tapply(mpg, cyl, mean))**
+
+**sapply(split(mtcarsmpg,mtcarscyl), mean)**
+
+**tapply(mtcarsmpg,mtcarscyl, mean)**
+
+
+Explanation:
+Different strokes
+
+with(mtcars, tapply(mpg, cyl, mean))
+##        4        6        8 
+## 26.66364 19.74286 15.10000
+sapply(split(mtcars$mpg, mtcars$cyl), mean)
+##        4        6        8 
+## 26.66364 19.74286 15.10000
+tapply(mtcars$mpg, mtcars$cyl, mean)
+##        4        6        8 
+## 26.66364 19.74286 15.10000
+4. Continuing with the ‘mtcars’ dataset from the previous Question, what is the absolute difference between the average horsepower of 4-cylinder cars and the average horsepower of 8-cylinder cars?
+
+(Please round your final answer to the nearest whole number. Only enter the numeric result and nothing else.)
+
+
+**127**
+
+Explanation:
+Using the built in looping tapply function to aggregate and then round/abs.
+
+Self-explanatory
+
+new <- tapply(mtcars$hp, mtcars$cyl, mean)
+round(abs(new[3]-new[1]))
+##   8 
+## 127
+5. If you run
+
+debug(ls)
+What happens when you next call the ‘ls’ function?
+
+
+**Execution of ‘ls’ will suspend at the beginning of the function and you will be in the browser.**
+
+Explanation:
+Debug walks through each block of code to identify errors and bugs.
+
